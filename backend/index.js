@@ -34,14 +34,12 @@ app.get("/", (req, res) => {
 
 const port = process.env.PORT || 3001;
 
-// mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(() => app.listen(port, () => {
-//     console.log("Server is started");
-//   }))
-//   .catch((error) => console.log(error.message));
-app.listen(port, () => {
-  console.log("Server is started");
-});
+mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => app.listen(port, () => {
+    console.log("Server is started");
+  }))
+  .catch((error) => console.log(error.message));
+
 mongoose.set("useCreateIndex", true);
 
 app.use("/login", loginAndSignupRoute);
