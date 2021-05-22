@@ -28,14 +28,20 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get("/", (req, res) => {
+  res.send("<h1>Home</h1>");
+});
+
 const port = process.env.PORT || 3001;
 
-mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => app.listen(port, () => {
-    console.log("Server is started");
-  }))
-  .catch((error) => console.log(error.message));
-
+// mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => app.listen(port, () => {
+//     console.log("Server is started");
+//   }))
+//   .catch((error) => console.log(error.message));
+app.listen(port, () => {
+  console.log("Server is started");
+});
 mongoose.set("useCreateIndex", true);
 
 app.use("/login", loginAndSignupRoute);
@@ -47,7 +53,3 @@ app.use("/categories", categoryRoute);
 app.use("/userAds", getUserAds);
 
 app.use("/deleteAd", deleteAd);
-
-app.get("/", (req, res) => {
-  res.send("<h1>Home</h1>");
-});
